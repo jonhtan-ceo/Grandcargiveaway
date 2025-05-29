@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Track Your GLA 250 - Grand Cars</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #00151f, #0d4d4d);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .tracking-box {
+      background: #ffffff;
+      color: #000;
+      max-width: 500px;
+      width: 100%;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      position: relative;
+    }
+
+    .tracking-box h1 {
+      font-size: 26px;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .tracking-box p {
+      color: #555;
+      font-size: 15px;
+      margin-bottom: 25px;
+    }
+
+    .tracking-box input[type="text"] {
+      width: 88%;
+      padding: 14px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      transition: border 0.3s ease;
+    }
+
+    .tracking-box input:focus {
+      outline: none;
+      border-color: #00a38f;
+      box-shadow: 0 0 0 3px rgba(0, 163, 143, 0.2);
+    }
+
+    .tracking-box button {
+      width: 100%;
+      padding: 14px;
+      background: #000;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .tracking-box button:hover {
+      background: #00a38f;
+    }
+
+    .tracking-box i {
+      margin-right: 8px;
+    }
+
+    .home-link {
+      display: inline-block;
+      margin-top: 15px;
+      color: #00a38f;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .home-link:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    /* Loading Overlay */
+    #loadingOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 15, 28, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      flex-direction: column;
+      color: #fff;
+      font-size: 18px;
+      display: none;
+    }
+
+    .loader {
+      border: 6px solid rgba(255, 255, 255, 0.2);
+      border-top: 6px solid #00a38f;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .tracking-box {
+        padding: 30px 20px;
+        border-radius: 16px;
+      }
+
+      .tracking-box h1 {
+        font-size: 22px;
+      }
+
+      .tracking-box input,
+      .tracking-box button {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="tracking-box">
+    <h1><i class="fas fa-map-marker-alt"></i> Track Your GLA 250 Delivery</h1>
+    <p>Enter your unique tracking code below to view your shipment status.</p>
+
+    <input type="text" id="trackingCode" placeholder="e.g., GLA-XXXXX" />
+    <button onclick="trackShipment()">
+      <i class="fas fa-search"></i> Track My Car
+    </button>
+
+    <!-- Home Button -->
+    <a href="home.html" class="home-link">
+      <i class="fas fa-home"></i> Back to Home
+    </a>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay">
+    <div class="loader"></div>
+    Tracking your car...
+  </div>
+
+  <footer>
+    &copy; 2025 Grand Cars Giveaway. All Rights Reserved.
+  </footer>
+
+  <script>
+    function trackShipment() {
+      const code = document.getElementById('trackingCode').value.trim();
+      if (!code) {
+        alert('Please enter your tracking code.');
+        return;
+      }
+
+      // Show the loading overlay
+      document.getElementById('loadingOverlay').style.display = 'flex';
+
+      // Simulate loading delay
+      setTimeout(() => {
+        window.location.href = `shipment-status.html?code=${encodeURIComponent(code)}`;
+      }, 1500);
+    }
+  </script>
+
+  <!-- Tawk.to Live Chat -->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/6835fae3faf85f190c60d1f1/1is9do2eb';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  </script>
+</body>
+</html>

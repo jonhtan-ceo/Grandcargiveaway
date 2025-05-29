@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shipment Tracking - Grand Cars</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #00151f, #0d4d4d);
+      color: #fff;
+    }
+
+    .navbar {
+      background-color: #000;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar img {
+      height: 45px;
+    }
+
+    .navbar a {
+      color: #0df0e0;
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .navbar a:hover {
+      color: #fff;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 40px auto;
+      padding: 40px;
+      background: #111;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 255, 200, 0.2);
+    }
+
+    .shipment-header h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: #0df0e0;
+    }
+
+    .shipment-header p {
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    .shipment-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .shipment-details div {
+      background: #1a1a1a;
+      padding: 15px 20px;
+      border-radius: 12px;
+      color: #ddd;
+    }
+
+    .shipment-details strong {
+      display: block;
+      font-weight: bold;
+      color: #0df0e0;
+      margin-bottom: 5px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      background-color: #ffc107;
+      color: #000;
+      border-radius: 999px;
+      font-weight: bold;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50%, 100% { opacity: 1; }
+      25%, 75% { opacity: 0.4; }
+    }
+
+    .progress-section {
+      margin-top: 40px;
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 5px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 18px;
+      background: #333;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 70%;
+      background: linear-gradient(90deg, #00ffa2, #00c7f7);
+      border-radius: 10px;
+      animation: fillMotion 2s infinite linear;
+    }
+
+    @keyframes fillMotion {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .timeline {
+      margin-top: 50px;
+      border-left: 4px solid #0df0e0;
+      padding-left: 30px;
+      position: relative;
+    }
+
+    .timeline-item {
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .timeline-icon {
+      position: absolute;
+      left: -38px;
+      top: 0;
+      background: #111;
+      border: 3px solid #0df0e0;
+      border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0df0e0;
+      font-size: 12px;
+    }
+
+    .timeline-item.highlight .timeline-icon {
+      background: #ffc107;
+      color: #000;
+      border-color: #ffc107;
+    }
+
+    .timeline-content h4 {
+      margin: 0;
+      font-size: 16px;
+      color: #0df0e0;
+    }
+
+    .timeline-content p {
+      margin: 3px 0;
+      font-size: 14px;
+      color: #bbb;
+    }
+
+    footer {
+      text-align: center;
+      color: #666;
+      margin: 50px 0 20px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .shipment-details {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        padding: 25px;
+        margin: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <img src="image2.png" alt="Grand Cars Logo">
+    <a href="tracking.html"><i class="fas fa-arrow-left"></i> Back</a>
+  </nav>
+
+  <div class="container">
+    <div class="shipment-header">
+      <h2><i class="fas fa-shipping-fast"></i> Vehicle Shipment Status</h2>
+      <p>Tracking Number: <strong>GLA2025XYZ123</strong></p>
+    </div>
+
+    <div class="shipment-details">
+      <div>
+        <strong>Vehicle:</strong>
+        <p>2022 Lexus RX 350 F SPORT Handling</p>
+      </div>
+      <div>
+        <strong>Status:</strong>
+        <p><span class="badge">Out for Final Delivery</span></p>
+      </div>
+      <div>
+        <strong>Current Location:</strong>
+        <p>Texas</p>
+      </div>
+      <div>
+        <strong>Destination:</strong>
+        <p>TBrad Cairns, 1821 S Bascom Ave, Campbell, CA 95008</p>
+      </div>
+    </div>
+
+    <div class="progress-section">
+      <div class="progress-labels">
+        <span>Received</span>
+        <span>In Transit</span>
+        <span>Cleared</span>
+        <span>Delivered</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 10%;"></div>
+      </div>
+    </div>
+
+    <div class="timeline" id="timeline"></div>
+  </div>
+
+  <footer>
+    &copy; 2025 Grand Cars Giveaway. All rights reserved.
+  </footer>
+
+  <script>
+    const shipment = {
+      updates: [
+        { date: '--------', status: 'Vehicle Received', location: 'California Export Lot' },
+        { date: '--------', status: 'Customs Cleared', location: 'California Customs Office' },
+        { date: '--------', status: 'Arrived in California', location: 'California' },
+        { date: '--------', status: 'In Transit', location: 'Texas Highway 83' },
+        { date: '2025-05-29', status: 'Out for Final Delivery', location: 'Texas Tx' }
+      ]
+    };
+
+    const timeline = document.getElementById('timeline');
+
+    timeline.innerHTML = shipment.updates.map((update, index) => {
+      const isFinal = update.status === 'Out for Final Delivery';
+      return `
+        <div class="timeline-item ${isFinal ? 'highlight' : ''}">
+          <div class="timeline-icon">
+            <i class="fas ${isFinal ? 'fa-flag-checkered' : 'fa-circle'}"></i>
+          </div>
+          <div class="timeline-content">
+            <h4>${update.status}</h4>
+            <p>${update.date}</p>
+            <p>${update.location}</p>
+          </div>
+        </div>
+      `;
+    }).join('');
+  </script>
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/6835fae3faf85f190c60d1f1/1is9do2eb';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  </script>
+</body>
+</html>
