@@ -209,15 +209,15 @@
       </div>
       <div>
         <strong>Status:</strong>
-        <p><span class="badge">Out for Final Delivery</span></p>
+        <p><span class="badge">Arrived in California</span></p>
       </div>
       <div>
         <strong>Current Location:</strong>
-        <p>Texas</p>
+        <p>California</p>
       </div>
       <div>
         <strong>Destination:</strong>
-        <p>TBrad Cairns, 1821 S Bascom Ave, Campbell, CA 95008</p>
+        <p>14878 Sutton Drive in San Jose, CA 95124</p>
       </div>
     </div>
 
@@ -229,7 +229,7 @@
         <span>Delivered</span>
       </div>
       <div class="progress-bar">
-        <div class="progress-fill" style="width: 10%;"></div>
+        <div class="progress-fill" style="width: 40%;"></div>
       </div>
     </div>
 
@@ -245,8 +245,8 @@
       updates: [
         { date: '--------', status: 'Vehicle Received', location: 'California Export Lot' },
         { date: '--------', status: 'Customs Cleared', location: 'California Customs Office' },
-        { date: '--------', status: 'Arrived in California', location: 'California' },
-        { date: '--------', status: 'In Transit', location: 'Texas Highway 83' },
+        { date: '2025-06-01', status: 'Arrived in California', location: 'California' },
+        { date: '2025-05-31', status: 'In Transit', location: 'Texas Highway 83' },
         { date: '2025-05-29', status: 'Out for Final Delivery', location: 'Texas Tx' }
       ]
     };
@@ -254,7 +254,7 @@
     const timeline = document.getElementById('timeline');
 
     timeline.innerHTML = shipment.updates.map((update, index) => {
-      const isFinal = update.status === 'Out for Final Delivery';
+      const isFinal = update.status === 'Arrived in California';
       return `
         <div class="timeline-item ${isFinal ? 'highlight' : ''}">
           <div class="timeline-icon">
